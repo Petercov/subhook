@@ -160,7 +160,7 @@ static size_t subhook_disasm(void *src, int32_t *reloc_op_offset) {
     /* NOP               */ {0x90, 0, 0}
   };
 
-  uint8_t *code = src;
+  uint8_t *code = (void *)src;
   size_t i;
   size_t len = 0;
   size_t operand_size = 4;
@@ -390,7 +390,7 @@ SUBHOOK_EXPORT subhook_t SUBHOOK_API subhook_new(void *src,
                                                  subhook_options_t options) {
   subhook_t hook;
 
-  if ((hook = malloc(sizeof(*hook))) == NULL) {
+  if ((hook = (subhook_t)malloc(sizeof(*hook))) == NULL) {
     return NULL;
   }
 
